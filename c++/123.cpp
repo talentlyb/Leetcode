@@ -20,7 +20,7 @@ public:
         int minPrice = prices.front();
         int maxPrice = prices.back();
         vector<int> mp1 (prices.size(), 0);
-		vector<int> mp2 (prices.size(), 0);
+        vector<int> mp2 (prices.size(), 0);
         for (i = 1; i < prices.size(); ++i) {
             minPrice = min(minPrice, prices[i]);
             mp1[i] = max(mp1[i-1],prices[i]-minPrice);
