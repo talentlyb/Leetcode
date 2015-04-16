@@ -1,49 +1,25 @@
 /** First time. 4/15/2015
  * 
- * Sort the array and start from both ends of the array.
- * Map is not useful because duplicate keys are not allowed.
+ * Hash table. Use unordered_map
  */
 
 class Solution {
 public:
     vector<int> twoSum(vector<int> &numbers, int target) {
+        unordered_map<int, int> mp;
         vector<int> result;
-        vector<int> copy = numbers;
-        int index1, index2, i;
-        sort(copy.begin(), copy.end());
-        int l = 0;
-        int r = copy.size()-1;
-        while (true) {
-            if (copy[l] + copy[r] > target) {
-                --r;
-            }
-            else if (copy[l] + copy[r] < target) {
-                ++l;
+        int num;
+        for (int i = 0; i < numbers.size(); ++i) {
+            num = target - numbers[i];
+            if (mp.find(num) != mp.end()) {
+                result.push_back(mp[num] + 1);
+                result.push_back(i + 1);
+                break;
             }
             else {
-                break;
+                mp[numbers[i]] = i;
             }
         }
-        for (i = 0; i < numbers.size(); ++i) {
-            if (numbers[i] == copy[l]) {
-                index1 = i + 1;
-                break;
-            }
-        }
-		for (i = 0; i < numbers.size(); ++i) {
-			if (numbers[i] == copy[r] && i != index1-1) {
-                index2 = i + 1;
-                break;
-            }
-		}
-		if (index1 < index2) {
-			result.push_back(index1);
-			result.push_back(index2);
-		}
-		else {
-			result.push_back(index2);
-			result.push_back(index1);
-		}
         return result;
     }
 };
